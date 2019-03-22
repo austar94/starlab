@@ -140,3 +140,4 @@ function restful_curl_get($url) {
 	return $result;
 }
 
+?>
