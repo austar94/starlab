@@ -33,6 +33,7 @@ function allStrip($data)
 }
 
 //	Seed128 + CBC + PKCS5	=============================================
+//https://github.com/qnibus/seed128 
 include_once $commonPath . '/seed/class.crypto.php';
 
 //	암호화
