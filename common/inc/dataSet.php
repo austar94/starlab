@@ -2,7 +2,7 @@
 //	기초 데이터 배열 선언
 $common							=	array();
 $us								=	array();
-$common['commonPath']			=	'/home/ijoo/common';
+$common['commonPath']			=	'/home/www/common';
 $common['DOCUMENTROOT']			=	$_SERVER['DOCUMENT_ROOT'];
 
 //@header('Content-Type: text/html; charset=UTF-8');
