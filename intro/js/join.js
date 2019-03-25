@@ -23,7 +23,7 @@ function checkUserID(){
 	}
   
   let url							=	'/intro/event/join_checkID';
-	let dataType				=	'json';
+	let dataType					=	'json';
 	let param						= {
 		userID					:	userID.val(),
 		token						:	token
