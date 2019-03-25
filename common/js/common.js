@@ -1,3 +1,36 @@
+function emailCheck(email) {
+	var patten = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+	
+	if (!patten.test(email)) {
+		return false;
+	}
+	return true;
+}
+
+
+/**
+ * 숫자만 입력
+ * onkeydown="return setNumberOnKeyDown(event)"/
+ * class="ime-mode" 필수
+ */
+function setNumberOnKeyDown(evt) {
+	var code = evt.which ? evt.which : event.keyCode;
+
+	//Backspace || Delete || Tab || ESC || Enter || F5
+	if (code == 46 || code == 8 || code == 9 || code == 27 || code == 13 || code == 116
+			// Ctrl + A , C , X , V
+			|| (evt.ctrlKey === true && (code == 65 || code == 67 || code == 86 || code == 88))
+			// PageUp ~ ArrowKey 
+			|| (code >= 33 && code <= 39)
+			// 0 ~ 9 || KeyPad 0 ~ 9
+			|| (code >= 48 && code <= 57) || (code >= 96 && code <= 105)) {
+		return;
+	}
+
+	return false;
+}
+
+
 /**
  * Call ajax service with POST
  * @param url
