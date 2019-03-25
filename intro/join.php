@@ -1,3 +1,5 @@
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/common/page/head.php'; ?>
+
 
 <input type="text" name="userID">
 <span id="idText"></span>
