@@ -13,6 +13,8 @@
   <input type="text" name="userMail">
   <span id="mailText"></span>
 
+  <label><input type="checkbox">필수사항</label>
+
   <script src="/intro/js/join.js"></script>
 </body>
 </html>
