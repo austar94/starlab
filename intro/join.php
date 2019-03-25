@@ -6,9 +6,12 @@
 
   <input type="text" name="userPW">
   <span id="pwText"></span>
-123
+
   <input type="text" name="re_userPW">
   <span id="re_pwText"></span>
+
+  <input type="text" name="userMail">
+  <span id="mailText"></span>
 
   <script src="/intro/js/join.js"></script>
 </body>
