@@ -22,6 +22,7 @@ if(preg_match('/[^a-z0-9]{6,15}+/', $_POST['userID'])) {
 }
 
 
+//userState		1:정상, 2:정지, 3:
 $search							=	array(
 	'userID'					  	=>	$_POST['userID'],
 	'userState'						=>	array(1,2,3)
