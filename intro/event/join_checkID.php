@@ -22,13 +22,14 @@ if(preg_match('/[^a-z0-9]{6,15}+/', $_POST['userID'])) {
 }
 
 
-//userState		1:정상, 2:정지, 3:
+//userState		1:정상, 2:정지, 3:미승인
 $search							=	array(
 	'userID'					  	=>	$_POST['userID'],
 	'userState'						=>	array(1,2,3)
 );
 $msg							  =	$common['MemberManager']->get_userData(1, '', '', $search);
 if($msg->getData()){
+	$_SESSION['idCheck']		=	$_POST['userID'];						//아이디 중복체크 내역 세션에 임시저장
 	$data						  =	array(
 		'errCd'						=>	0,
 		'errMsg'					=>	'',

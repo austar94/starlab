@@ -9,13 +9,13 @@ class MarketingManager{
 	}
 
 	//회원리스트
-	public function get_userData($pageNo = '', $recordPerPage = '', $userCode = '', $data = array()){
+	public function get_userData($pageNo = '', $recordPerPage = '', $userIdx = '', $data = array()){
 		global $us;
 		$values					=	array();
 		$where0					=	'';
 		$LIMIT					=	'';
 
-		$userIdx				=	$data['userIdx'];
+		$userCode				=	$data['userCode'];					//회원 코드
 		$userMobile				=	$data['userMobile'];				//회원 핸드폰
 		$userID					=	$data['userID'];					//회원 아이디
 		$userPWD				=	$data['userPWD'];					//회원 비밀번호
