@@ -2,9 +2,9 @@
 
 php기본틀
 
-/intro/index.php
+로그인: [github][githublink] [githublink]: https://github.com/austar94/starlab/blob/master/intro/index.php "Go login"
 
-  -로그인
+  
   
   
  /intro/join.php
