@@ -86,7 +86,7 @@ if(!$_POST['userMail']){
 	exit;
 }
 
-if(preg_match('/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i', $_POST['userMail'])) {
+if(preg_match('/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/', $_POST['userMail'])) {
 	$data						=	array(
 		'errCd'						=>	1,
 		'errMsg'					=>	'잘못된 형식의 이메일입니다.'

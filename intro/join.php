@@ -1,6 +1,7 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/common/page/head.php'; ?>
 <body>
 	<form id="frm">
+		<input type="hidden" name="token" value="<?=$_SESSION['token'][$_SERVER["PHP_SELF"]?>">
 	  <input type="text" name="userID" maxlenth="16" onkeypress="if(event.keyCode==13) {checkUserID(); return false;}">
 	  <span id="idText"></span>
 	  <button onclick="checkUserID()">중복확인</button>
