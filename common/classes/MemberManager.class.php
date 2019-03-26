@@ -8,6 +8,30 @@ class MarketingManager{
 		$this->fm				=	new FileManager();
 	}
 
+	//로그인 기록
+	public function insert_loginLog($data){
+		global $us;
+		$values					=	array();
+		$SQL					=	array();
+
+		$userIdx				=	$data['userIdx'];
+		$userID					=	$data['userID'];
+		$IP						=	$_SERVER['REMOTE_ADDR'];
+
+		//마지막 로그인 정보 업데이트
+		$today					=	date('Y-m-d H:i:s');
+		$SQL[]					=	"UPDATE tbl_userInfo SET lastLogin = ? WHERE AND userIdx = ?";
+		$values[]				=	array($today $userIdx);
+
+		$SQL[]					=	"INSERT INTO tbl_loginIP 
+										(userIdx, userID, IP) 
+									VALUE 
+										(?, ?, ?)";
+		$values[]				=	array($userIdx, $userID, $IP);
+		$msg 					=	$this->dbm->bindTransaction($SQL, $values, 'Y');
+		return $msg;
+	}
+
 	//회원 등록
 	public function insert_user($data){
 		global $us;

@@ -1,4 +1,4 @@
-const token			    =	$('input[name="token"]').val();
+const token			=	$('input[name="token"]').val();
 let userIDCheck     = 	0;
 let userPWCheck     = 	0;
 let userMailCheck	=	0;
