@@ -4,7 +4,6 @@ php기본틀
 
 
 ## **로그인**
-<hr/>
 
 
 [로그인](https://github.com/austar94/starlab/blob/master/intro/index.php),
@@ -13,7 +12,6 @@ php기본틀
 
 
 ## **회원가입**
-<hr/>
 
 
 [회원가입](https://github.com/austar94/starlab/blob/master/intro/join.php),
@@ -32,7 +30,6 @@ php기본틀
 
 
 ## **상품등록, 수정**
-<hr/>
 
 
 [상품등록](https://github.com/austar94/starlab/blob/master/goods/goodsAdd.php)
@@ -44,4 +41,3 @@ php기본틀
 
   -배송옵션
 
-<hr/>
