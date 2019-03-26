@@ -3,8 +3,10 @@ $loginFlag						=	1;
 include $_SERVER['DOCUMENT_ROOT'] . "/common/page/top.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/common/page/jsonLogin.php";
 
+foreach($_POST as $key=>$post) $_POST[$key] = allTags($post);
+
 if(!$_POST['userID']){
-  $data						=	array(
+	$data						=	array(
 		'errCd'						=>	1,
 		'errMsg'					=>	'아이디를 입력해주시기 바랍니다.'
 	);

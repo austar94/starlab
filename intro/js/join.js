@@ -62,10 +62,35 @@ $('#loginBtn').on('click', function(){
 
 	if(!userMailCheck){
 		alert('이메일 양식에 맞지않습니다.');
+		$('input[name="userMail"]').focus();
+		return;
+	}
+
+	if(!$('input[name="check"]').prop('checked')){
+		alert('필수사항 체크 후 가입가능합니다.');
+		return;
+	}
+
+	if(!$('input[name="userZip"]').val().trim()){
+		alert('우편번호를 입력해주세요.');
+		return;
+	}
+
+	if(!$('input[name="userAddr2"]').val().trim()){
+		alert('상세주소를 입력해주세요.');
 		return;
 	}
 	
-	
+
+	let form				=   document.querySelector("#frm");
+	let postData			=   new FormData(form);
+
+	let url					=	'/intro/event/join_joinProc';
+	let dataType			=	'json';
+	let param				= 	postData;
+	let formType			=	1;
+
+	postService(url, dataType, param, '', formType);
 
 
 })
@@ -136,7 +161,7 @@ $('input[name="userPWD"]').on('keyup', function(){
 //아이디체크
 function checkUserID(){
 	userIDCheck       	= 0;
-	let userIDRule		=	/^[a-z0-9+]{6,15}$/; 
+	let userIDRule		=	/^[a-zA-Z0-9+]{6,15}$/; 
 	let userID        	= $('input[name="userID"]');
   
 	if(!userID.val().trim()){

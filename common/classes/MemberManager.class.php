@@ -8,6 +8,68 @@ class MarketingManager{
 		$this->fm				=	new FileManager();
 	}
 
+	//회원 등록
+	public function insert_user($data){
+		global $us;
+		$values					=	array();
+
+		$userID					=	$data['userID'];					//회원 아이디
+		$userPWD				=	$data['userPWD'];					//회원 비밀번호
+		$userType				=	$data['userType'];					//1:관리자, 2:직원, 3:일반회원
+		$loginType				=	$data['loginType'];					//1:일반가입,  2:네이버, 3:카카오, 4:구글, 5:페이스북
+		$userName				=	$data['userName'];					//회원 이름
+		$userMobile				=	$data['userMobile'];				//회원 핸드폰번호
+		$userZip				=	$data['userZip'];					//회원 우편번호
+		$userAddr1				=	$data['userAddr1'];					//회원 주소
+		$userAddr2				=	$data['userAddr2'];					//회원 주소
+		$userMail				=	$data['userMail'];					//회원 이메일주소
+
+		$SQL					=	"INSERT INTO tbl_userInfo 
+										(userID, userPWD, userType, loginType, userName, userMobile, userZip, userAddr1, userAddr2, userMail) 
+									VALUE 
+										(?, PASSWORD(?), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		$values					=	array($userID, $userPWD, $userType, $loginType, $userName, $userMobile, $userZip, $userAddr1, $userAddr2, $userMail);	
+		$msg 					=	$this->dbm->bindExecute($SQL, $values, 'Y');
+		//멤버 등록에 성공했을경우
+		if($msg->isResult()){
+			//해당 유저 idx
+			$search					=	array(
+				'userID'				=>	$userID
+			);
+			$msg					=	$this->get_userData(1 ,'', '', $search);
+			$user					=	$msg->getData();
+			$user					=	allStrip($user[0]);
+			$userIdx				=	$user['userIdx'];
+
+			$this->cm				=	new CorpManager();
+			$mmsg					=	$this->cm->get_corpData();
+			$basic 					=	$mmsg->getData();
+			$basic					=	allStrip($basic[0]);
+			$isOrderPoint			=	$basic['isOrderPoint'];					//포인트 기능 사용여부
+			$joinPoint				=	$basic['joinPoint'];					//회원가입 기념 포인트
+
+			//포인트 적립 기능이 활성화 되어있을 경우
+			if($isOrderPoint){
+
+				//회원가입 지급 포인트가 0이상일 경우
+				if($joinPoint > 0){
+					$this->pm			=	new PointManager();
+					$data				=	array(
+						'userIdx'		=>	$userIdx,
+						'pointContent'	=>	$userName . '님의 회원가입을 환영합니다! 회원가입 ' . number_format($joinPoint) . '적립금 지급',
+						'savingPoint'	=>	$joinPoint,
+						'relevantTable'	=>	'@join',
+						'relevantID'	=>	$userIdx,
+						'relevantAction'=>	'join' . '-' . uniqid('')
+					);
+					$this->pm->insertPoint($data);
+				}
+			}
+		}
+
+		return 	$msg;
+	}
+
 	//회원리스트
 	public function get_userData($pageNo = '', $recordPerPage = '', $userIdx = '', $data = array()){
 		global $us;
