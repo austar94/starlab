@@ -14,8 +14,10 @@ php기본틀
 ## **회원가입**
 
 
-[회원가입](https://github.com/austar94/starlab/blob/master/intro/join.php),
-[회원가입_js](https://github.com/austar94/starlab/blob/master/intro/js/join.js)
+[회원가입_](https://github.com/austar94/starlab/blob/master/intro/join.php),
+[회원가입_js](https://github.com/austar94/starlab/blob/master/intro/js/join.js),
+[회원가입_php](https://github.com/austar94/starlab/blob/master/intro/event/join_joinProc.php),
+[회원가입_sql](https://github.com/austar94/starlab/blob/master/common/classes/MemberManager.class.php)
 
   -정규식
   
