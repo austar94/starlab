@@ -2,8 +2,12 @@
 
 php기본틀
 
+<hr/>
+
 [로그인](https://github.com/austar94/starlab/blob/master/intro/index.php),
 [로그인_js](https://github.com/austar94/starlab/blob/master/intro/js/index.js)
+
+<hr/>
 
 - 아이디, 비밀번호, 비밀번호확인, 핸드폰번호, 이메일
 
@@ -20,6 +24,7 @@ php기본틀
   
     -이메일 -   (/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/)
   
+<hr/>
 
 
 -단계별옵션, 개별옵션
@@ -30,3 +35,5 @@ php기본틀
 
 [상품등록](https://github.com/austar94/starlab/blob/master/goods/goodsAdd.php)
 [상품등록_js](https://github.com/austar94/starlab/blob/master/goods/js/goodsAdd.js)
+
+<hr/>
