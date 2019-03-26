@@ -2,17 +2,17 @@
 
 php기본틀
 
-
-**로그인
 <hr/>
+**로그인
+
 
 [로그인](https://github.com/austar94/starlab/blob/master/intro/index.php),
 [로그인_js](https://github.com/austar94/starlab/blob/master/intro/js/index.js)
 
 
-
-**회원가입
 <hr/>
+**회원가입
+
 
 [회원가입](https://github.com/austar94/starlab/blob/master/intro/join.php),
 [회원가입_js](https://github.com/austar94/starlab/blob/master/intro/js/join.js)
@@ -28,9 +28,9 @@ php기본틀
     -이메일 -   (/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/)
   
 
-
-**상품등록, 수정
 <hr/>
+**상품등록, 수정
+
 
 [상품등록](https://github.com/austar94/starlab/blob/master/goods/goodsAdd.php)
 [상품등록_js](https://github.com/austar94/starlab/blob/master/goods/js/goodsAdd.js)
