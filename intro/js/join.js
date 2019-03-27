@@ -6,7 +6,7 @@ let userRPWCheck    = 	0;
 
 //회원가입
 $('#loginBtn').on('click', function(){
-	var moblieExp				=	/^\d{3}\d{3,4}\d{4}$/;
+	let moblieExp				=	/^\d{3}\d{3,4}\d{4}$/;
 
 	if(!$('input[name="userID"]').val().trim()){
 		alert('아이디를 입력해주세요.');
