@@ -28,7 +28,7 @@ if(!$_POST['token'] && !$_GET['token']){
 $pathToken						=	$_POST['token']		?	$_POST['token']	:	$_GET['token'];
 
 //현재 사이트의 토큰값
-$csrf_token          = $_SESSION['token'][$_SERVER["PHP_SELF"];
+$csrf_token          = $_SESSION['token'][$_SERVER["PHP_SELF"]];
 
 if(!$pathToken	||	$pathToken !== $csrf_token){
 	$data						=	array(
