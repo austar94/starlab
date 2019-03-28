@@ -7,6 +7,71 @@ function emailCheck(email) {
 	return true;
 }
 
+/**
+ * 
+ * @param x
+ * @returns 
+ */
+function onlyNumber(x){
+	return x.toString().replace(/[^0-9]/g,'');
+}
+
+/**
+ * 숫자 세자리 단위 마다 콤마
+ *
+ * @param x
+ * @returns
+ */
+function numberWithCommas(x) {
+	
+	if( undefined == x || null == x || '' == x) return x;
+	
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+
+/**
+ * 숫자 세자리 단위 마타 콤마 (KeyPress)
+ * onkeyup="setNumberWithCommasKeyUp(this)"/
+ */
+function setNumberWithCommasKeyUp(obj) {
+	obj.value = numberWithCommas(removeCommas(obj.value)); //콤마 찍기
+}
+
+/**
+ * 금액 포멧에서 ','제거
+ *
+ * @param str
+ * @returns
+ */
+function removeCommas(str) {
+	return str.replace(/,/gi, "");
+}
+
+/**
+ * 숫자 및 [.]
+ * onkeydown="return setPeriodNumberOnKeyDown(event)"/
+ * class="ime-mode" 필수
+ * @param evt
+ * @returns {Boolean}
+ */
+function setPeriodNumberOnKeyDown(evt){
+	var code = evt.which ? evt.which : event.keyCode;
+
+	//Backspace || Delete || Tab || ESC || Enter || F5
+	if (code == 46 || code == 8 || code == 9 || code == 27 || code == 13 || code == 116
+			// Ctrl + A , C , X , V
+			|| (evt.ctrlKey === true && (code == 65 || code == 67 || code == 86 || code == 88))
+			// PageUp ~ ArrowKey 
+			|| (code >= 33 && code <= 39) || code == 110 || code == 190
+			// 0 ~ 9 || KeyPad 0 ~ 9
+			|| (code >= 48 && code <= 57) || (code >= 96 && code <= 105)) {
+		return;
+	}
+
+	return false;
+}
+
 
 /**
  * 숫자만 입력

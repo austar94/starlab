@@ -7,6 +7,9 @@ $isSale					=	1;						//판매여부
 $isDelivery				=	0;						//배송여부
 $isOpiton				=	0;						//옵션여부
 $isAdditional			=	0;						//추가상품여부
+$isDiscount				=	0;						//할인여부 			0:할인없음, 1:원할인, 2:퍼센트할인
+$discount				=	'';						//할인양
+$deliveryType			=	1;						//배송 조건			1:무료, 2:유료, 3:금액, 4:수량
 
 $opHeadList				=	'';						//옵션 헤드
 $addHeadList			=	'';						//추가상품 헤드
@@ -33,6 +36,9 @@ if($goodsIdx){
 	$isDelivery			=	$goods['isDelivery'];	
 	$isOpiton			=	$goods['isOpiton'];	
 	$isAdditional		=	$goods['isAdditional'];	
+	$isDiscount			=	$goods['isDiscount'];
+	$discount			=	$goods['discount'];
+	$deliveryType		=	$goods['deliveryType'];
 
 	//옵션이 존재할경우
 	if($isOption){
@@ -67,10 +73,51 @@ $msg					=	$common['GoodsManager']->get_cartList('', '', '', $search);
 	
 ?>
 <body>
-	<div id="goodsBox">
-		<input type="hidden" name="goods" <?=$goodsIdx?>>
+	<form id="frm">
+		<?= //수정 대부 코드저장 ?>
+		<input type="hidden" name="goods" value="<?=$goodsIdx?>">
+		<?= //수정 대부 코드저장 ?>
+
+		<input type="text" name="goodsName" value="<?=$goodsName?>">
+
+		<?= //판매여부 ?>
+		<label><input type="radio" name="isSale" value="1"<?=($isSale == 1) ? ' checked' : ''?>>판매</label>
+		<label><input type="radio" name="isSale" value="0"<?=($isSale == 1) ? '' : ' checked'?>>판매 중지</label>
+		<?= //판매여부 ?>
+
+		<?= //판매금액 숫자만입력, 3자리 콤마 ?>
+		<input type="text" name="goodsPrice" onkeydown="return setPeriodNumberOnKeyDown(event)" onkeyup="setNumberWithCommasKeyUp(this)">
+		<?= //판매금액 숫자만입력, 3자리 콤마 ?>
+		
+		<?= //할인여부 ?>
+		<label><input type="radio" name="isDiscount" value="0"<?=($isDiscount == 0) ? ' checked' : ''?>>할인없음</label>
+		<label><input type="radio" name="isDiscount" value="1"<?=($isDiscount == 1) ? ' checked' : ''?>>원 할인</label>
+		<label><input type="radio" name="isDiscount" value="2"<?=($isDiscount == 2) ? ' checked' : ''?>>퍼센트 할인</label>
+		<div class="discount"<?=($isDiscount) ? '' : ' style="display:none"'?>style="display:none">
+			<input type="text" name="discount" onkeydown="return setPeriodNumberOnKeyDown(event)" onkeyup="setNumberWithCommasKeyUp(this); setDiscount(this)" value="<?=$discount?>">
+		</div>
+		<?= //할인여부 ?>
+
+		<?= //배송여부 ?>
+		<label><input type="radio" name="isDelivery" value="0"<?=($isDelivery) ? ' checked' : ''?>>배송없음</label>
+		<label><input type="radio" name="isDelivery" value="1"<?=($isDelivery) ? '' : ' checked'?>>배송있음</label>
+		<div class="deliverForm">
+			<label><input type="radio" name="deliveryType" value="1"<?=($deliveryType == 1) ? ' checked' : ''?>>무료배송</label>
+			<label><input type="radio" name="deliveryType" value="2"<?=($deliveryType == 2) ? ' checked' : ''?>>고정배송</label>
+			<label><input type="radio" name="deliveryType" value="3"<?=($deliveryType == 3) ? ' checked' : ''?>>금액별 무료배송</label>
+			<label><input type="radio" name="deliveryType" value="4"<?=($deliveryType == 4) ? ' checked' : ''?>>수량별 무료배송</label>
+			<div class="deilveryTypeForm">
+				<div class="deliveryType1">
+
+				</div>
+			</div>
+		</div>
+		<?= //배송여부 ?>
+
 		<div id="opBox"></div>
 		<div id="addBox"></div>
-	</div>
+	</form>
+
+	<script src="/goods/js/goodsAdd.js"></script>
 </body>
 </html>
