@@ -4,11 +4,12 @@ $goodsIdx				=	$_GET['no']		?	allTags($_GET['no'])		:	'';
 $goodsName				=	'';						//상품 명
 $goodsInfo				=	'';						//상품 안내
 $isSale					=	1;						//판매여부
-$isDelivery				=	0;						//배송여부
 $isOpiton				=	0;						//옵션여부
 $isAdditional			=	0;						//추가상품여부
 $isDiscount				=	0;						//할인여부 			0:할인없음, 1:원할인, 2:퍼센트할인
 $discount				=	'';						//할인양
+$isDelivery				=	0;						//배송여부
+$deliverySet			=	1;						//배송 설정 1:기본설정, 2:직접설정
 $deliveryType			=	1;						//배송 조건			1:무료, 2:유료, 3:금액, 4:수량
 
 $opHeadList				=	'';						//옵션 헤드
@@ -33,11 +34,12 @@ if($goodsIdx){
 	$goodsName			=	$goods['goodsName'];
 	$goodsInfo			=	$goods['goodsInfo'];	
 	$isSale				=	$goods['isSale'];	
-	$isDelivery			=	$goods['isDelivery'];	
 	$isOpiton			=	$goods['isOpiton'];	
 	$isAdditional		=	$goods['isAdditional'];	
 	$isDiscount			=	$goods['isDiscount'];
 	$discount			=	$goods['discount'];
+	$isDelivery			=	$goods['isDelivery'];	
+	$deliverySet		=	$goods['deliverySet'];
 	$deliveryType		=	$goods['deliveryType'];
 
 	//옵션이 존재할경우
@@ -101,6 +103,14 @@ $msg					=	$common['GoodsManager']->get_cartList('', '', '', $search);
 		<?= //배송여부 ?>
 		<label><input type="radio" name="isDelivery" value="0"<?=($isDelivery) ? ' checked' : ''?>>배송없음</label>
 		<label><input type="radio" name="isDelivery" value="1"<?=($isDelivery) ? '' : ' checked'?>>배송있음</label>
+
+		<?= //배송 기존 설정, 직접설정 여부 ?>
+		<div class="deliverySet">
+			<label><input type="radio" name="deliverySet" value="1"<?=($deliverySet == 1) ? ' checked' : ''?>>기본설정</label>
+			<label><input type="radio" name="deliverySet" value="2"<?=($deliverySet == 2) ? ' checked' : ''?>>직접설정</label>
+		</div>
+		<?= //배송 기존 설정, 직접설정 여부 ?>
+
 		<div class="deliverForm">
 			<label><input type="radio" name="deliveryType" value="1"<?=($deliveryType == 1) ? ' checked' : ''?>>무료배송</label>
 			<label><input type="radio" name="deliveryType" value="2"<?=($deliveryType == 2) ? ' checked' : ''?>>고정배송</label>
