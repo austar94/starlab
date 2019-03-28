@@ -7,7 +7,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/common/page/pageCheck.php';
 
 //  2019-03-25 star 현재 임시로 페이지별 token고정
 if(!$_SESSION['token'][$_SERVER["PHP_SELF"]]){
-  $_SESSION['token'][$_SERVER["PHP_SELF"]       = base64_encode(openssl_random_pseudo_bytes(32));
+  $_SESSION['token'][$_SERVER["PHP_SELF"]]       = base64_encode(openssl_random_pseudo_bytes(32));
 }
 ?>
 <!DOCTYPE html>
