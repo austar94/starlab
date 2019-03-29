@@ -1,4 +1,4 @@
-const token			=	$('input[name="token"]').val();
+
 
 function loginProc(){
 	if(!$('input[name="userID"]').val().trim()){

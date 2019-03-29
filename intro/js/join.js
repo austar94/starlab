@@ -1,4 +1,3 @@
-const token			=	$('input[name="token"]').val();
 let userIDCheck     = 	0;
 let userPWCheck     = 	0;
 let userMailCheck	=	0;
@@ -160,6 +159,7 @@ $('input[name="userPWD"]').on('keyup', function(){
 
 //아이디체크
 function checkUserID(){
+	let token			=	$('input[name="token"]').val();
 	userIDCheck       	= 0;
 	let userIDRule		=	/^[a-zA-Z0-9+]{6,15}$/; 
 	let userID        	= $('input[name="userID"]');

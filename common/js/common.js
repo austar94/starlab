@@ -138,6 +138,10 @@ function ajax(url, dataType, param, method, formType, gbn, callback, async){
 		data				:	param,
 		async				:	async,
 		success				:	function(data){
+			//토큰 갱신
+			if(data.token){
+				$('input[name="token"]').val(data.token);
+			}
 			if(dataType == 'json'){
 				if(method == "GET"){
 					data		=	JSON.parse(data);

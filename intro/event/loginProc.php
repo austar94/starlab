@@ -2,13 +2,15 @@
 $loginFlag						=	1;
 include $_SERVER['DOCUMENT_ROOT'] . "/common/page/top.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/common/page/jsonLogin.php";
+$newToken						=	newTOKEN($_SERVER["HTTP_REFERER"]);
 
 foreach($_POST as $key=>$post) $_POST[$key] = allTags($post);
 
 if(!$_POST['userID']){
 	$data						=	array(
 		'errCd'						=>	1,
-		'errMsg'					=>	'아이디를 입력해주시기 바랍니다.'
+		'errMsg'					=>	'아이디를 입력해주시기 바랍니다.',
+		'token'						=>	$newToken
 	);
 	echo json_encode($data);
 	exit;
@@ -17,7 +19,8 @@ if(!$_POST['userID']){
 if(!$_POST['userPWD']){
 	$data						=	array(
 		'errCd'						=>	1,
-		'errMsg'					=>	'비밀번호를 입력해주시기 바랍니다.'
+		'errMsg'					=>	'비밀번호를 입력해주시기 바랍니다.',
+		'token'						=>	$newToken
 	);
 	echo json_encode($data);
 	exit;
@@ -65,7 +68,8 @@ if($user){
 	else if($userState == 2){
 		$data						=	array(
 			'errCd'						=>	1,
-			'errMsg'					=>	'정지된 아이디입니다. 관리자에게 문의해주시기 바랍니다.'
+			'errMsg'					=>	'정지된 아이디입니다. 관리자에게 문의해주시기 바랍니다.',
+			'token'						=>	$newToken
 		);
 		echo json_encode($data);
 		exit;
@@ -74,7 +78,8 @@ if($user){
 	else if($userState == 2){
 		$data						=	array(
 			'errCd'						=>	1,
-			'errMsg'					=>	'미승인된 아이디입니다. 관리자에게 확인해주시기 바랍니다.'
+			'errMsg'					=>	'미승인된 아이디입니다. 관리자에게 확인해주시기 바랍니다.',
+			'token'						=>	$newToken
 		);
 		echo json_encode($data);
 		exit;
@@ -83,7 +88,8 @@ if($user){
 	else if($userState == 2){
 		$data						=	array(
 			'errCd'						=>	1,
-			'errMsg'					=>	'삭제된 아이디입니다.'
+			'errMsg'					=>	'삭제된 아이디입니다.',
+			'token'						=>	$newToken
 		);
 		echo json_encode($data);
 		exit;
@@ -93,7 +99,8 @@ if($user){
 } else {
 	$data						=	array(
 		'errCd'						=>	1,
-		'errMsg'					=>	'아이디 혹은 비밀번호를 확인해주시기 바랍니다.'
+		'errMsg'					=>	'아이디 혹은 비밀번호를 확인해주시기 바랍니다.',
+		'token'						=>	$newToken
 	);
 	echo json_encode($data);
 	exit;

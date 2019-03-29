@@ -1,4 +1,11 @@
 <?php
+
+//토큰 갱신
+function newTOKEN($url){
+	$_SESSION['token'][$url]       = base64_encode(openssl_random_pseudo_bytes(32));
+	return $_SESSION['token'][$url];
+}
+
 //	remove AllTags
 function allTags($data)
 {

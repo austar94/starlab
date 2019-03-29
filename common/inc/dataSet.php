@@ -96,7 +96,7 @@ $common['adminPage']			=	'/_Manager';
 
 $refererPage					=	$_SERVER['HTTP_REFERER'];													//	이전 페이지
 $selfPage						=	$_SERVER['PHP_SELF'];														//	자기의 페이지
-
+$nowPage						=	$_SERVER['HTTPS'] ? 'https://'.$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI'] : 'http://'.$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI'];					//	현재페이지
 
 defined(	'Heeyam'				)	OR	define(	'Heeyam',				true													);	//	개별페이지 접근불가
 ?>

@@ -1,14 +1,11 @@
 <?php 
 include $_SERVER['DOCUMENT_ROOT'] . '/common/page/top.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/common/page/pageCheck.php';
-
-//페이지별 token 생성.
-//$_SESSION['csrf_token']		=	base64_encode(openssl_random_pseudo_bytes(32));
-
 //  2019-03-25 star 현재 임시로 페이지별 token고정
-if(!$_SESSION['token'][$_SERVER["PHP_SELF"]]){
-  $_SESSION['token'][$_SERVER["PHP_SELF"]]       = base64_encode(openssl_random_pseudo_bytes(32));
+if(!$_SESSION['token'][$nowPage]){
+	$_SESSION['token'][$nowPage]       =	base64_encode(openssl_random_pseudo_bytes(32));
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="ko">
