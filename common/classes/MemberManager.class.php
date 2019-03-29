@@ -123,7 +123,6 @@ class MarketingManager{
 		$order					=	$data['order'];						//정렬
 
 		$select0				=	'';
-		$values[]				=	$us['corpIdx'];
 		if($amount){
 			$select0			.=	", (
 				SELECT SUM( oi.amt ) 
@@ -255,14 +254,14 @@ class MarketingManager{
 
 		$SQL					=	"SELECT ui.corpIdx, ui.userIdx, ui.userID, ui.userName, ui.userMobile, ui.userMail, ui.userCode, ui.loginType, ui.userType, ui.userState, ui.userZip, ui.userAddr1, ui.userAddr2, ui.userLevel, ui.userPoint, ui.lastLogin, ui.manageMsg, ui.isSMS, ui.isMail, ui.regDate $select0  
 									FROM tbl_userInfo AS ui  
-									WHERE ui.corpIdx = ? $where0 
+									WHERE 1=1 $where0 
 									$orderBy 
 									$LIMIT";
 		$msg 					=	$this->dbm->bindExecute($SQL, $values);
 
 		$SQL					=	"SELECT count(ui.userIdx) AS count 
 									FROM tbl_userInfo AS ui 
-									WHERE ui.corpIdx = ? $where0";
+									WHERE 1=1 $where0";
 		$msg2 					=	$this->dbm->bindExecute($SQL, $bindValue);
 		$temp					=	$msg2->getData();
 		if($temp){

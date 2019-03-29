@@ -8,6 +8,200 @@ class GoodsManager
 		$this->dbm 				= 	new DBManager();
 	}
 
+	/**
+	 * @date			2019-02-08
+	 * @author			star
+	 * @details			카테고리 리스트
+	 */
+	public function get_cateList($pageNo = '', $recordPerPage = '', $cateCode = '', $data = array()){
+		global $us;
+		$set0					=	'';
+		$joinQ					=	'';
+		$where0					=	'';
+		$LIMIT					=	'';
+		$values					=	array();
+		
+		$cateLevel				=	$data['cateLevel'];
+		$count					=	$data['count'];
+		$isUse					=	$data['isUse'];
+		$isCheck				=	$data['isCheck'];
+		$order					=	$data['order'];
+		$cateSeqU				=	$data['cateSeqU'];
+		$cateSeqD				=	$data['cateSeqD'];
+		$cateSeq				=	$data['cateSeq'];
+		$cateName				=	$data['cateName'];
+		$cateIdx				=	$data['cateIdx'];
+		$join					=	$data['join'];
+		$group					=	$data['group'];
+
+		if($isUse){
+			$where0				.=	" AND cl.cateLevel = ?";
+			$values[]			=	$cateLevel;
+		}
+
+		if($isUse){
+			$where0				.=	" AND cl.isUse = ?";
+			$values[]			=	$isUse;
+		}
+		
+		if($isCheck){
+			$where0				.=	$isCheck 		?	" AND cl.isCheck = ?"		:	'';
+			$values[]			=	$isCheck;
+		}
+		
+		if($cateCode){
+			$where0				.=	$cateCode 		?	" AND cl.cateCode = ?"		:	'';
+			$values[]			=	$cateCode;
+		}
+
+		if($cateSeq){
+			$where0				.=	$cateSeq 		?	" AND cl.cateSeq = ?"		:	'';
+			$values[]			=	$cateSeq;
+		}
+
+		if($cateSeqU){
+			$where0				.=	$cateSeqU 		?	" AND cl.cateSeq > ?"		:	'';
+			$values[]			=	$cateSeqU;
+		}
+
+		if($cateSeqD){
+			$where0				.=	$cateSeqD 		?	" AND cl.cateSeq < ?"		:	'';
+			$values[]			=	$cateSeqD;
+		}
+
+		if($cateName){
+			$where0				.=	$cateName 		?	" AND cl.cateName = ?"		:	'';
+			$values[]			=	$cateName;
+		}
+
+		if($cateIdx){
+			$where0				.=	$cateIdx		?	" AND cl.cateIdx = ?"		:	'';
+			$values[]			=	$cateIdx;
+		}
+
+	
+		$groupBy				=	$group			?	" GROUP BY $group"			:	'';
+		$orderBy				=	$order			?	" ORDER BY $order"			:	'';
+		
+
+		if($pageNo || $recordPerPage){
+			if(!$recordPerPage){
+				$LIMIT			=	"LIMIT ?";
+				$values[]		=	$pageNo;
+			} else {
+				$LIMIT			=	"LIMIT ?, ?";
+				$values[]		=	$pageNo;
+				$values[]		=	$recordPerPage;
+			}
+		}
+
+		$SQL					=	"SELECT cl.cateIdx, cl.cateCode, cl.cateSeq, cl.cateLevel, cl.cateName, cl.isCheck, cl.regDate $set0 
+									FROM tbl_categoryList AS cl 
+									WHERE cl.corpIdx = ? $where0 
+									$groupBy 
+									$orderBy 
+									$LIMIT";
+		$msg 					=	$this->dbm->bindExecute($SQL, $values, '');
+		return $msg;
+	}
+
+	/**
+	 * @date		2019-02-12
+	 * @author		star
+	 * @details		상품 옵션
+	 */
+	public function get_godosOpList($pageNo = '', $recordPerPage = '', $opCode = '', $data = array()){
+		global $us;
+		$values					=	array();
+		$where0					=	'';
+
+		$opName1				=	$data['opName1'];
+		$opName2				=	$data['opName2'];
+		$opName3				=	$data['opName3'];
+		$selOpLevel				=	$data['selOpLevel'];
+		$goodsCode				=	$data['goodsCode'];
+		$opType					=	$data['opType'];
+		$isUse					=	$data['isUse'];
+		$isSale					=	$data['isSale'];
+
+		$order					=	$data['order'];
+		$group					=	$data['group'];
+
+		if($opCode){
+			$where0				.=	" AND gp.opCode = ?";
+			$values[]			=	$opCode;
+		}
+
+		if($selOpLevel){
+			if($selOpLevel == 1){
+				if($opName1){
+					$where0				.=	" AND gp.opName1 = ?";
+					$values[]			=	$opName1;
+				}
+			} else if($selOpLevel){
+				if($opName1){
+					$where0				.=	" AND gp.opName1 = ?";
+					$values[]			=	$opName1;
+				}
+				if($opName2){
+					$where0				.=	" AND gp.opName2 = ?";
+					$values[]			=	$opName2;
+				}
+			}
+		} else {
+			if($opName1){
+				$where0				.=	" AND gp.opName1 = ?";
+				$values[]			=	$opName1;
+			}
+			if($opName2){
+				$where0				.=	" AND gp.opName2 = ?";
+				$values[]			=	$opName2;
+			}
+		}
+		
+
+		if($goodsCode){
+			$where0				.=	" AND gp.goodsCode = ?";
+			$values[]			=	$goodsCode;
+		}
+		if($opType){
+			$where0				.=	" AND gp.opType = ?";
+			$values[]			=	$opType;
+		}
+		if($isUse){
+			$where0				.=	" AND gp.isUse = ?";
+			$values[]			=	$isUse;
+		}
+		if($isSale){
+			$where0				.=	" AND gp.isSale = ?";
+			$values[]			=	$isSale;
+		}
+		
+		$orderBy				=	$order			?	" ORDER BY $order"						:	'';
+		$groupBy				=	$group			?	" GROUP BY $group"						:	'';
+
+		if($pageNo || $recordPerPage){
+			if(!$recordPerPage){
+				$LIMIT			=	"LIMIT ?";
+				$values[]		=	$pageNo;
+			} else {
+				$LIMIT			=	"LIMIT ?, ?";
+				$values[]		=	$pageNo;
+				$values[]		=	$recordPerPage;
+			}
+		}
+
+
+		$SQL					=	"SELECT gp.opIdx, gp.opCode, gp.opType, gp.goodsCode, gp.opStock, gp.opHead1, gp.opHead2, gp.opHead3, gp.opLevel, gp.opName1, gp.opName2, gp.opName3, gp.opPrice, gp.isSale, gp.isUse    
+									FROM tbl_goodsOpList AS gp 
+									WHERE 1=1 $where0 
+									$orderBy 
+									$groupBy 
+									$LIMIT";
+		$msg 					=	$this->dbm->bindExecute($SQL, $values);
+		return $msg;
+	}
+
 	//상품리스트
 	public function get_goodsList($pageNo = '', $recordPerPage = '', $goodsCode = '', $data = array()){
 		global $us;
@@ -16,7 +210,9 @@ class GoodsManager
 		$where0					=	'';
 		$LIMIT					=	'';
 
-		$category1				=	$data['category1'];							//카테고리
+		$category1				=	$data['category1'];							//대 카테고리 idx
+		$category2				=	$data['category2'];							//중 카테고리 idx
+		$category3				=	$data['category3'];							//소 카테고리 idx
 		$isUse					=	$data['isUse'];								//삭제여부
 		$order					=	$data['order'];								//정렬
 		$searchType				=	$data['searchType'];						//검색
