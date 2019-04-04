@@ -2,13 +2,13 @@
 $goodsIdx						=	allTags($_GET['no'])		?	allTags($_GET['no'])		:	'';
 $type							=	allTags($_GET['type'])		?	allTags($_GET['type'])		:	1;		//1:등록, 2:수정, 3:복제
 
-//수정이나 복제일때 goodsCode가 없는경우
-if(($type == 2 || $type == 3) && !$goodsCode){
+//수정이나 복제일때 goodsIdx 없는경우
+if(($type == 2 || $type == 3) && !$goodsIdx){
 	$common['CommonManager']->goPage('/goods', '잘못된 접근입니다.');
 	exit;
 } 
-//일단 등록인데 goodsCode가 있는경우
-else if($type == 1 && $goodsCode){
+//일단 등록인데 goodsIdx 있는경우
+else if($type == 1 && $goodsIdx){
 	$common['CommonManager']->goPage('/goods/', '잘못된 접근입니다.');
 	exit;
 }
@@ -193,7 +193,7 @@ if($goodsIdx){
 		$search						=	array(
 			'isUse'						=>	1,
 			'opType'					=>	1,
-			'goodsCode'					=>	$goodsCode
+			'goodsIdx'					=>	$goodsIdx
 		);
 		$msg						=	$common['GoodsManager']->get_godosOpList('', '', '', $search);
 		$opOtion1					=	$msg->getData();
@@ -204,7 +204,7 @@ if($goodsIdx){
 		$search						=	array(
 			'isUse'						=>	1,
 			'opType'					=>	2,
-			'goodsCode'					=>	$goodsCode
+			'goodsIdx'					=>	$goodsIdx
 		);
 		$msg						=	$common['GoodsManager']->get_godosOpList('', '', '', $search);
 		$opOtion2					=	$msg->getData();
@@ -230,7 +230,7 @@ if($goodsIdx){
 		$search						=	array(
 			'isUse'						=>	1,
 			'opType'					=>	3,
-			'goodsCode'					=>	$goodsCode
+			'goodsIdx'					=>	$goodsIdx
 		);
 		$msg						=	$common['GoodsManager']->get_godosOpList('', '', '', $search);
 		$addOption					=	$msg->getData();
@@ -251,15 +251,40 @@ if(!$cateList){
 	exit;
 }
 
-$message					=	($type == 2 && $goodsCode)	?	'수정'	:	'등록';
+$message					=	($type == 2 && $goodsIdx)	?	'수정'	:	'등록';
 
 ?>
 <body>
 	<form id="frm">
 		<input type="hidden" name="token" value="<?=$_SESSION['token'][$nowPage]?>">
-		<?= //수정 대부 코드저장 ?>
+		<input type="hidden" name="type" value="<?=$type?>">
 		<input type="hidden" name="goods" value="<?=$goodsIdx?>">
-		<?= //수정 대부 코드저장 ?>
+		<input type="hidden" name="isDel_1" id="isDel_1" value='0'>
+		<input type="hidden" name="isDel_2" id="isDel_2" value='0'>
+		<input type="hidden" name="isDel_3" id="isDel_3" value='0'>
+		<input type="hidden" name="isDel_4" id="isDel_4" value='0'>
+		<input type="hidden" name="isDel_5" id="isDel_5" value='0'>
+		<input type="hidden" name="oldImg1" id="oldImg1" value='<?=$goodsImg1?>'>
+		<input type="hidden" name="oldImg2" id="oldImg2" value='<?=$goodsImg2?>'>
+		<input type="hidden" name="oldImg3" id="oldImg3" value='<?=$goodsImg3?>'>
+		<input type="hidden" name="oldImg4" id="oldImg4" value='<?=$goodsImg4?>'>
+		<input type="hidden" name="oldImg5" id="oldImg5" value='<?=$goodsImg5?>'>
+
+		<?=	//카테고리?>
+		<select class="category" name="category1" onchange="seleteCategory(this)">
+			<option value="">1차카테고리</option>
+			<?php
+			for($i = 0; $i < sizeof($cateList); $i++){
+				$rs					=	allStrip($cateList[$i]);
+
+				$cateIdx			=	$rs['cateIdx'];
+				$cateLevel			=	$rs['cateLevel'];
+				$cateName			=	$rs['cateName'];
+			}
+			?>
+			<option value="<?=$cateIdx?>"><?=$cateName?></option>
+			<?php }?>
+		</select>
 
 		<input type="text" name="goodsName" value="<?=$goodsName?>">
 

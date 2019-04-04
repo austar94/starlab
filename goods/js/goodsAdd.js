@@ -1,3 +1,29 @@
+//하위카테고리 추가
+function categorySet(data){
+	let cate					=	data.cate;
+
+	
+}
+
+//카테고리 선택시
+function seleteCategory(e){
+	let token				=	$('input[name="token"]').val();
+	let cateLevel			=	$(this).attr('name').substr($(this).attr('name').length - 1);		//이름에서 레벨값 가져옴
+	let cate				=	$(this).val();														//선택 카테고리 값
+
+	//해당 카테고리보다 하위값이 존재할경우 모두 삭제
+	$('.category:eq('+cateLevel+')').remove();
+
+	//다음 카테고리값이 존재하는지 확인
+	let url					=	'/goods/event/goodsAdd_getCategory';
+	let dataType			=	'json';
+	let param				= 	{
+		cate					:	cate,
+		token					:	token
+	};
+	postService(url, dataType, param, categorySet);
+}
+
 //할인 입력시
 function setDiscount(e){
 	let goodsPrice			=	$('input[name="goodsPrice"]');
