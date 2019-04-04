@@ -1,15 +1,8 @@
-//하위카테고리 추가
-function categorySet(data){
-	let cate					=	data.cate;
-
-	
-}
-
 //카테고리 선택시
 function seleteCategory(e){
 	let token				=	$('input[name="token"]').val();
-	let cateLevel			=	$(this).attr('name').substr($(this).attr('name').length - 1);		//이름에서 레벨값 가져옴
-	let cate				=	$(this).val();														//선택 카테고리 값
+	let cateLevel			=	$(e).attr('name').substr($(e).attr('name').length - 1);		//이름에서 레벨값 가져옴
+	let cate				=	$(e).val();														//선택 카테고리 값
 
 	//해당 카테고리보다 하위값이 존재할경우 모두 삭제
 	$('.category:eq('+cateLevel+')').remove();
@@ -21,7 +14,21 @@ function seleteCategory(e){
 		cate					:	cate,
 		token					:	token
 	};
-	postService(url, dataType, param, categorySet);
+	postService(url, dataType, param, function(data){
+		let cateList			=	data.list;
+
+		//하위 카테고리가 존재할경우 하위 카테고리 출력
+		if(cateList.length){
+			var str				=	'';
+			str					+=	'<select class="category" name="category'+(cateLevel+1)+'" onchange="seleteCategory(this)">';
+			str					+=	'	<option value="">'+(cateLevel+1)+'차카테고리</option>';
+			$.each(cateList, function(index, cate) {
+				str				+=	'	<option value="'+cate.cateIdx+'">'+cate.cateName+'</option>'
+			});
+			str					+=	'</select>';
+			$(e).append(str);
+		}
+	});
 }
 
 //할인 입력시

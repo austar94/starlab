@@ -50,7 +50,8 @@ if($cateList){
 	$data				=	array(
 		'errCd'				=>	1,
 		'errMsg'			=>	'',
-		'cate'				=>	$cateList
+		'token'				=>	$newToken,
+		'list'				=>	$cateList
 	);
 	echo json_encode($data);
 	exit;
@@ -60,7 +61,8 @@ else {
 	$data				=	array(
 		'errCd'				=>	1,
 		'errMsg'			=>	'',
-		'token'				=>	$newToken
+		'token'				=>	$newToken,
+		'list'				=>	''
 	);
 	echo json_encode($data);
 	exit;
