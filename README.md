@@ -39,6 +39,8 @@ php기본틀
 [상품등록](https://github.com/austar94/starlab/blob/master/goods/goodsAdd.php)
 [상품등록_js](https://github.com/austar94/starlab/blob/master/goods/js/goodsAdd.js)
 
+  -n차 카테
+
   -단계별옵션, 개별옵션
 
   -추가상품
