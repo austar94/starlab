@@ -32,11 +32,13 @@ function seleteCategory(e){
 }
 
 //할인 입력시
-function setDiscount(e){
+function setDiscount(){
 	let goodsPrice			=	$('input[name="goodsPrice"]');
 	let goodsPriceVal		=	onlyNumber(goodsPrice.val());
-	let discount			=	onlyNumber($(e).val());
+	let discount			=	$('input[name="discount"]');
+	let discountVal			=	onlyNumber(discount.val());
 	let isDiscountVal		=	$('input[name="isDiscount"]:checked').val();
+	let showDiscountPrice	=	$('input[name="showDiscountPrice"]');				//계산가격
 
 	//할인을 입력하는데 상품가격이 입력되어있지 않을경우
 	if(goodsPriceVal < 1){
@@ -44,36 +46,38 @@ function setDiscount(e){
 		goodsPrice.focus();
 		return;
 	}
+	showDiscountPrice.val(goodsPrice);
 
 	//원 할인일 경우
 	if(isDiscountVal == 1){
 		//입력된 할인 금액이 상품금액보다 많을 경우
-		if(goodsPriceVal < discount){
+		if(goodsPriceVal < discountVal){
 			alert('실제 금액보다 할인된 금액이 많습니다.');
-			$(e).val(numberWithCommas(goodsPrice));
+			discount.val(numberWithCommas(goodsPrice));
 			return;
 		}
-
-		$(e).val(numberWithCommas(goodsPrice - discount));
-
+		showDiscountPrice.val(numberWithCommas(goodsPrice - discountVal));
+		return;
 	} else if(isDiscountVal == 2){
 		//입력된 할인 퍼센트가 100이상일 경우 되돌려보냄
-		if(discount > 100){
+		if(discountVal > 100){
 			alert('할인율은 100퍼센트를 넘길 수 없습니다.');
-			$(e).val(100);
+			discount.val('');
 			return;
-		} 
+		}
 		//몪이 0이 아닌경우
-		else if(discount%100 != 0){
+		else if(discountVal%100 != 0){
 			alert('할인 판매 금액은 100단위가 되도록 입력해주세요.');
 			return;
 		} 
 		//금액 계산
 		else {
-			$(e).val(numberWithCommas(goodsPrice * (1 - discount % 100)));
+			showDiscountPrice.val(numberWithCommas(goodsPrice * (1 - discountVal % 100)));
+			return;
 		}
 	} else {
 		alert('할인 방식을 선택해주세요.');
+		return;
 	}
 }
 
@@ -81,6 +85,7 @@ function setDiscount(e){
 $('input[name="isDiscount"]').on('change', function(){
 	let isDiscount			=	$(this).val();
 
+	//원할인, 퍼센트 할인 선택시
 	if(isDiscount == 1 || isDiscount == 2){
 		$('input[name="discount"]').val('');
 		$('.discount').show();

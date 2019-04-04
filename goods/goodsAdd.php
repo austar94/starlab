@@ -289,13 +289,13 @@ $message					=	($type == 2 && $goodsIdx)	?	'수정'	:	'등록';
 		<input type="text" name="goodsName" value="<?=$goodsName?>">
 
 		<?= //판매여부 ?>
-		<label><input type="radio" name="isSale" value="1"<?=($isSale == 1) ? ' checked' : ''?>>판매</label>
-		<label><input type="radio" name="isSale" value="0"<?=($isSale) ? '' : ' checked'?>>판매 중지</label>
+		<label><input type="radio" name="isSale" value="1"<?=$isSale ? ' checked' : ''?>>판매</label>
+		<label><input type="radio" name="isSale" value="0"<?=$isSale ? '' : ' checked'?>>판매 중지</label>
 		<?= //판매여부 ?>
 
 		<?= //품절여부 ?>
-		<label><input type="radio" name="isSoldOut" value="1"<?=($isSoldOut == 1) ? ' checked' : ''?>>판매</label>
-		<label><input type="radio" name="isSoldOut" value="0"<?=($isSoldOut) ? '' : ' checked'?>>판매 중지</label>
+		<label><input type="radio" name="isSoldOut" value="1"<?=$isSoldOut ? ' checked' : ''?>>판매</label>
+		<label><input type="radio" name="isSoldOut" value="0"<?=$isSoldOut ? '' : ' checked'?>>판매 중지</label>
 		<?= //품절여부 ?>
 
 		<?= //판매금액 숫자만입력, 3자리 콤마 ?>
@@ -307,8 +307,10 @@ $message					=	($type == 2 && $goodsIdx)	?	'수정'	:	'등록';
 		<label><input type="radio" name="isDiscount" value="1"<?=($isDiscount == 1) ? ' checked' : ''?>>원 할인</label>
 		<label><input type="radio" name="isDiscount" value="2"<?=($isDiscount == 2) ? ' checked' : ''?>>퍼센트 할인</label>
 		<div class="discount"<?=($isDiscount) ? '' : ' style="display:none"'?>style="display:none">
-			<input type="text" name="discount" onkeydown="return setPeriodNumberOnKeyDown(event)" onkeyup="setNumberWithCommasKeyUp(this); setDiscount(this)" value="<?=$discount?>">
+			<input type="text" name="discount" onkeydown="return setPeriodNumberOnKeyDown(event)" onkeyup="setNumberWithCommasKeyUp(this);" onchange="setDiscount(this)" value="<?=$discount?>">
+			<input type="text" name="showDiscountPrice" value="" readonly>
 		</div>
+
 		<?= //할인여부 ?>
 
 		<?= //배송여부 ?>
@@ -316,23 +318,17 @@ $message					=	($type == 2 && $goodsIdx)	?	'수정'	:	'등록';
 		<label><input type="radio" name="isDelivery" value="1"<?=($isDelivery) ? '' : ' checked'?>>배송있음</label>
 
 		<?= //배송 기존 설정, 직접설정 여부 ?>
-		<div class="deliverySet">
-			<label><input type="radio" name="deliverySet" value="1"<?=($deliverySet == 1) ? ' checked' : ''?>>기본설정</label>
-			<label><input type="radio" name="deliverySet" value="2"<?=($deliverySet == 2) ? ' checked' : ''?>>직접설정</label>
-		</div>
+		<label><input type="radio" name="deliverySet" value="1"<?=($deliverySet == 1) ? ' checked' : ''?>>기본설정</label>
+		<label><input type="radio" name="deliverySet" value="2"<?=($deliverySet == 2) ? ' checked' : ''?>>직접설정</label>
 		<?= //배송 기존 설정, 직접설정 여부 ?>
 
-		<div class="deliverForm">
-			<label><input type="radio" name="deliveryType" value="1"<?=($deliveryType == 1) ? ' checked' : ''?>>무료배송</label>
-			<label><input type="radio" name="deliveryType" value="2"<?=($deliveryType == 2) ? ' checked' : ''?>>고정배송</label>
-			<label><input type="radio" name="deliveryType" value="3"<?=($deliveryType == 3) ? ' checked' : ''?>>금액별 무료배송</label>
-			<label><input type="radio" name="deliveryType" value="4"<?=($deliveryType == 4) ? ' checked' : ''?>>수량별 무료배송</label>
-			<div class="deilveryTypeForm">
-				<div class="deliveryType1">
+		<label><input type="radio" name="deliveryType" value="1"<?=($deliveryType == 1) ? ' checked' : ''?>>무료배송</label>
+		<label><input type="radio" name="deliveryType" value="2"<?=($deliveryType == 2) ? ' checked' : ''?>>고정배송</label>
+		<label><input type="radio" name="deliveryType" value="3"<?=($deliveryType == 3) ? ' checked' : ''?>>금액별 무료배송</label>
+		<label><input type="radio" name="deliveryType" value="4"<?=($deliveryType == 4) ? ' checked' : ''?>>수량별 무료배송</label>
 
-				</div>
-			</div>
-		</div>
+		<input type="text" name="deliveryCondition" value="">
+
 		<?= //배송여부 ?>
 
 		<div id="opBox"></div>
