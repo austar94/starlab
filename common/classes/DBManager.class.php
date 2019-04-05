@@ -6,6 +6,7 @@ include_once $common['commonPath'] . '/classes/Message.class.php';
  * @author		star
  * @details		바인드쿼리 추가
  * @details		로그파일 - Ym 로 생성되도록 수정
+ *	DB오류났을경우 해당 유저의 외부 DB접속가능여부확인 SQL실행문 권한 여부 확인
  */
 class DBManager {
 	private $conn;
