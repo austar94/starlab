@@ -6,6 +6,9 @@ let userRPWCheck    = 	0;
 //회원가입
 $('#loginBtn').on('click', function(){
 	let moblieExp				=	/^\d{3}\d{3,4}\d{4}$/;
+	let PWDCheck					=	PWDRuleCheck(PWD.val());
+	let PWDResult					=	PWDCheck.result;
+	let PWDMsg						=	PWDCheck.msg;
 
 	if(!$('input[name="userID"]').val().trim()){
 		alert('아이디를 입력해주세요.');
@@ -24,8 +27,9 @@ $('#loginBtn').on('click', function(){
 		return;
 	}
 
-	if(!userPWCheck){
-		alert('비밀번호가 양식에 맞지않습니다.');
+	if(!PWDResult){
+		alert(PWDMsg);
+		$('input[name="userPWD"]').focus();
 		return;
 	}
 
@@ -129,33 +133,62 @@ $('input[name="re_userPWD"]').on('keyup', function(){
 
 //비밀번호 체크
 $('input[name="userPWD"]').on('keyup', function(){
-	let passRule			=	/^(?=.*[a-zA-Z0-9+])((?=.*\d)|(?=.*\W)).{6,15}$/;
-	let pass				=	$(this).val();
-	let num					=	pass.search(/[0-9]/g);
-	let eng					=	pass.search(/[a-z]/ig);
-	let spe					=	pass.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
-	userPWCheck				=	0;
+	let PWD				=	$(this);
+	let check			=	PWDRuleCheck(PWD.val());
+	let result			=	check.result;
+	let msg				=	check.msg;
 
-	if(pass.length < 6 || pass.length > 15){
-		$('#pwText').text('비밀번호 조건이 맞지 않습니다. ((영문 대소문자,숫자,특수문자, 6~15자))');
-		return;
-	}
-   
-	if(pass.search(/₩s/) != -1){
-		$('#pwText').text('비밀번호는 공백없이 입력해주세요.');
-		return;
-	} 
-
-	if(num < 0 || eng < 0 || spe < 0 ){
-		
-		$('#pwText').text('비밀번호 조건이 맞지 않습니다. ((영문 대소문자,숫자,특수문자, 6~15자))');
-		return;
-	}
-
-	$('#pwText').text('');
-	userPWCheck				=	1;
-	return;
+	$('#pwText').text(msg);
+	if(result)	userPWCheck	=	1;
 })
+
+/**
+ * 비밀번호 체크(규칙, 자릿수)
+ * @param {string} PWD 비밀번호
+ * @returns {Array} 실패시 메시지, 성공여부
+ */
+function PWDRuleCheck(PWD){
+	let mixCount			=	0;
+	let result				=	array();
+	let num					=	PWD.search(/[0-9]/g);
+	let eng					=	PWD.search(/[a-z]/ig);
+	let spe					=	PWD.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+	
+	if(PWD.length < 8 || PWD.length > 15){
+		result				=	array(
+			'msg'				=	'영문, 숫자, 특수문자 8~15자로 입력해주세요.',
+			'result'			=	false
+		);
+		return result;
+	}
+	
+	if(PWD.search(/₩s/) != -1){
+		result				=	array(
+			'msg'				=	'비밀번호는 공백없이 입력해주세요.',
+			'result'			=	false
+		);
+		return result;
+	}
+
+	if(num != -1) mixCount++;
+	if(eng != -1) mixCount++;
+	if(spe != -1) mixCount++;
+
+	//2가지 이상 조합이 아닐경우
+	if(mixCount < 2){
+		result				=	array(
+			'msg'				=	'비밀번호는 8~15자 이내로 영문(대,소문자), 숫자, 특수문자 3가지 조합 중 2가지 이상',
+			'result'			=	false
+		);
+		return result;
+	}
+
+	result					=	array(
+		'msg'					=	'',
+		'result'				=	true
+	);
+	return result;
+}
 
 //아이디체크
 function checkUserID(){
