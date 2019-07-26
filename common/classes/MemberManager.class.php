@@ -1,5 +1,5 @@
 <?php
-
+namespace common;
 class MarketingManager{
 	private $dbm;
 

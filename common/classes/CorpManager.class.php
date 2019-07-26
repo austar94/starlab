@@ -1,4 +1,5 @@
 <?php
+namespace common;
 class CorpManager
 {
 	private $dbm;
