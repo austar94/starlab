@@ -1,5 +1,5 @@
 <?php
-namespace common;
+namespace star\common\classes;
 include_once $common['commonPath'] . '/inc/dbInfo.php';
 include_once $common['commonPath'] . '/classes/Message.class.php';
 /**

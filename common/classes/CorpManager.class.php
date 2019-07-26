@@ -1,5 +1,5 @@
 <?php
-namespace common;
+namespace star\common\classes;
 class CorpManager
 {
 	private $dbm;

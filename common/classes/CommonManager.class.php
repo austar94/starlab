@@ -1,5 +1,5 @@
 <?php
-namespace common;
+namespace star\common\classes;
 class CommonManager {
 	private $dbm;
 
