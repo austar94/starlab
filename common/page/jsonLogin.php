@@ -27,10 +27,10 @@ if(!$_POST['token'] && !$_GET['token']){
 }
 $pathToken						=	$_POST['token']		?	$_POST['token']	:	$_GET['token'];
 
-//요청온 이전 사이트의 토큰값
+//이전 사이트의 토큰값
 $csrf_token						=	$_SESSION['token'][$_SERVER["HTTP_REFERER"]];
 
-if(!$pathToken	||	$pathToken !== $csrf_token){
+if(!$pathToken || !$csrf_token || $pathToken !== $csrf_token){
 	$data						=	array(
 		'errCd'						=>	1,
 		'errMsg'					=>	'유효하지 않은 토큰입니다.'

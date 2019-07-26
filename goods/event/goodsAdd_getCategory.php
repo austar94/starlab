@@ -14,7 +14,6 @@ if(!$_POST['cate']){
 	exit;
 }
 
-
 $msg					=	$common['GoodsManager']->get_cateList(1, '', $_POST['cate']);
 $cate					=	$msg->getData();
 if(!$cate){
